@@ -17,7 +17,7 @@ const webpackConfig = {
     ],
   },
 
-  mode: 'production',
+  mode: 'development',
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, '../dist/client'),

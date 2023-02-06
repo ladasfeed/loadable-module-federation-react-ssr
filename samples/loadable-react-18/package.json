@@ -7,11 +7,15 @@
     "app2"
   ],
   "scripts": {
+    "postinstall": "patch-package",
     "start": "lerna run --parallel start",
     "serve": "lerna run --parallel serve",
     "build": "lerna run build"
   },
   "devDependencies": {
     "lerna": "3.22.1"
+  },
+  "dependencies": {
+    "patch-package": "^6.5.1"
   }
 }

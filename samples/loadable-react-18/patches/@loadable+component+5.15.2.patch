@@ -1,0 +1,15 @@
+diff --git a/node_modules/@loadable/component/dist/loadable.esm.js b/node_modules/@loadable/component/dist/loadable.esm.js
+index 3b90d9c..60fcb95 100644
+--- a/node_modules/@loadable/component/dist/loadable.esm.js
++++ b/node_modules/@loadable/component/dist/loadable.esm.js
+@@ -294,6 +294,10 @@ function createLoadable(_ref) {
+       ;
+ 
+       _proto.loadSync = function loadSync() {
++        if (!options.isServer && options.mf === true) {
++          this.loadAsync()
++          return
++        }
+         // load sync is expecting component to be in the "loading" state already
+         // sounds weird, but loading=true is the initial state of InnerLoadable
+         if (!this.state.loading) return;

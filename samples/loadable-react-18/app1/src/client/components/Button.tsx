@@ -6,7 +6,7 @@ export interface ButtonProps {
 }
 
 export const Button = ({ label, onClick }: ButtonProps) => {
-  return <button onClick={onClick}>{label}</button>;
+  return <button onClick={onClick}>Local Button{label}</button>;
 };
 
 export default Button;

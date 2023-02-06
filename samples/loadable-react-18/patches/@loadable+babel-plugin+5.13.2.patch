@@ -1,0 +1,13 @@
+diff --git a/node_modules/@loadable/babel-plugin/lib/properties/resolve.js b/node_modules/@loadable/babel-plugin/lib/properties/resolve.js
+index a23c9ff..4205139 100644
+--- a/node_modules/@loadable/babel-plugin/lib/properties/resolve.js
++++ b/node_modules/@loadable/babel-plugin/lib/properties/resolve.js
+@@ -48,7 +48,7 @@ function resolveProperty({
+     callPath,
+     funcPath
+   }) => {
+-    const targetTemplate = moduleFederation ? 'federated' : 'standard';
++    const targetTemplate = moduleFederation && process.env.SERVER_SIDE_MODULE_FEDERATION ? 'federated' : 'standard';
+     return t.objectMethod('method', t.identifier('resolve'), funcPath.node.params, t.blockStatement(templates[targetTemplate]({
+       ID: getCallValue(callPath)
+     })));

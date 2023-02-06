@@ -2,7 +2,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 import type { ContentProps } from 'app2/Content';
 
-const LoadableButton = loadable(() => import('./Button'), {
+const LoadableButton = loadable(() => import(/* webpackChunkName: "buttons" */ './Button'), {
   fallback: <div>loading button...</div>,
 });
 
@@ -10,6 +10,17 @@ const LoadableContent = loadable(
   () => import('app2/Content') as Promise<{ default: React.FC<ContentProps> }>,
   {
     fallback: <div>loading content...</div>,
+    mf: true,
+    isServer: (() => {
+      try {
+        console.log(window);
+        return false;
+      } catch {
+        return true;
+      }
+    })(),
+    // you can uncomment the line below to see fallback!
+    // ssr: false
   },
 );
 
@@ -43,12 +54,24 @@ const App = () => {
       </div>
 
       <div style={{ padding: '1rem' }}>
+        {/* LoadableButton is a separate chunk! */}
         <LoadableButton label="Loadable Button" />
       </div>
 
       <div style={{ padding: '1rem' }}>
         <LoadableContent content={state} />
       </div>
+
+      {/*
+         disable the div above and uncomment lines below
+         to see dynamic importing. 
+         ( just type something to input to mount component )
+      */}
+      {/* {state && (
+      <div style={{ padding: '1rem' }}>
+        <LoadableContent key={isServer ? 'qwe' : 'frrfds'} content={state} />
+      </div>
+      )}  */}
     </div>
   );
 };

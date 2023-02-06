@@ -4,6 +4,11 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 const shared = require('./webpack.shared');
 const moduleFederationPlugin = require('./module-federation');
 
+Object.defineProperty(process.env, 'SERVER_SIDE_MODULE_FEDERATION', {
+  value: true,
+  writable: false,
+});
+
 /**
  * @type {import('webpack').Configuration}
  **/
@@ -19,7 +24,7 @@ const webpackConfig = {
     filename: '[name].js',
     libraryTarget: 'commonjs-module',
   },
-  mode: 'production',
+  mode: 'development',
   plugins: [
     new LoadablePlugin({
       writeToDisk: true,
